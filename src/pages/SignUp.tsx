@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react"
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
     const [fullname, setFullname] = useState<string>("");
@@ -41,6 +42,13 @@ export default function SignUp() {
                                         onChange={(e) => setFullname(e.target.value)}
                                         className="p-2 my-3 border rounded-lg focus:outline-none  focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                                     />
+                                </div>
+                                <div>
+                                    <label htmlFor="role" className="font-bold">Role</label>
+                                    <select name="" id="" className="p-2 my-3 w-full border rounded-lg ">
+                                        <option value="" className="">--Selected Role--</option>
+                                        <option value="teacher">Teacher</option>
+                                    </select>
                                 </div>
                                 <div className="flex flex-col">
                                     <label htmlFor="email" className="font-bold">
@@ -96,7 +104,7 @@ export default function SignUp() {
                                 </div>
                             </form>
                             <p className="text-center mt-1">
-                                Already have an account? Sign in
+                                Already have an account? <Link to="/login">Sign in</Link> 
                             </p>
                         </div>
                     </div>
