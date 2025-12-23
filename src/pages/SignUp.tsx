@@ -1,3 +1,5 @@
+import axios from "axios";
+import { log } from "console";
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
@@ -27,13 +29,12 @@ export default function SignUp() {
     conpass
   };
 
-  try{
+ const dataPost =async()=>{
+  const res = await axios.post("http://localhost:3000/users",data);
+  console.log("Data sucessfull insert",res.data);
+  
 
-  }
-  catch(error){
-    
-  }
-
+ }
   return (
     <>
       <div className="w-screen bg-[#0d1424] min-h-screen h-full flex items-center relative overflow-hidden">
