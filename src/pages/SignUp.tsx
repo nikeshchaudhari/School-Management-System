@@ -1,7 +1,7 @@
-import axios from "axios";
-import { log } from "console";
-import { useState, type FormEvent } from "react";
+
+import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [fullname, setFullname] = useState<string>("");
@@ -10,31 +10,20 @@ export default function SignUp() {
   const [conpass, setConnpass] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
-  const formSubmit = async (e: FormEvent<HTMLElement>) => {
+  const formSubmit=(e:FormEvent<HTMLElementEventMap>)=>{
     e.preventDefault();
 
-    const formData = new FormData();
+    if(password !== conpass){
+      toast.error("Password & Confirm Password donot mathch!")
+      return;
 
-    formData.append("fullname", fullname),
-      formData.append("role", role),
-      formData.append("email", email),
-      formData.append("password", password),
-      formData.append("conpass", conpass);
-  };
-  const data ={
-    fullname,
-    role,
-    email,
-    password,
-    conpass
-  };
+    }
 
- const dataPost =async()=>{
-  const res = await axios.post("http://localhost:3000/users",data);
-  console.log("Data sucessfull insert",res.data);
-  
+    if(!role){
+    toast.info("Please select a role");  
+    }
 
- }
+  }
   return (
     <>
       <div className="w-screen bg-[#0d1424] min-h-screen h-full flex items-center relative overflow-hidden">
@@ -73,6 +62,7 @@ export default function SignUp() {
                   <select
                     name=""
                     id="role"
+                    value={role}
                     onChange={(e) => setRole(e.target.value)}
                     className="p-2 my-3 w-full border rounded-lg "
                   >
